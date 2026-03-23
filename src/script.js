@@ -8,6 +8,7 @@ const UI = {
     count: document.getElementById("count"),
     category: document.getElementById("category"),
     btn_create: document.getElementById("btn-create"),
+    btn_delete_all: document.getElementById("btn-Delet-all"),
 };
 // get total
 
@@ -64,13 +65,12 @@ function clear_date() {
 }
 // read
 
-function shoItem(){
-let table='';
-for(let i=0;i<datebro.length;i++)
-{
-    table+=`
+function shoItem() {
+    let table = "";
+    for (let i = 0; i < datebro.length; i++) {
+        table += `
     <tr class="bg-gray-900/50 hover:bg-gray-700 transition-colors duration-200">
-                        <td class="p-3">${i+1}</td>
+                        <td class="p-3">${i + 1}</td>
                         <td class="p-3 font-medium">${datebro[i].title}</td>
                         <td class="p-3">${datebro[i].price}</td>
                         <td class="p-3">${datebro[i].taxes}</td>
@@ -88,19 +88,33 @@ for(let i=0;i<datebro.length;i++)
                         </td>
                     </tr>
                     `;
-}
-document.getElementById('tbody').innerHTML=table;
+    }
+    document.getElementById("tbody").innerHTML = table;
+
+    if (datebro.length > 0) {
+        UI.btn_delete_all.innerHTML = `Delete All (${datebro.length})`;
+        UI.btn_delete_all.style.display = 'block'; 
+    } else {
+        UI.btn_delete_all.style.display = 'none'; 
+    }
 }
 
 // delete
 
-function delet_item(i){
-datebro.splice(i,1);
-localStorage.prodect=JSON.stringify(datebro)
-shoItem();  
+function delet_item(i) {
+    datebro.splice(i, 1);
+    localStorage.prodect = JSON.stringify(datebro);
+    shoItem();
 }
 
 // clean date
-
+function delete_all_data() {
+    if (confirm("Are you sure you want to delete everything?")) {
+        localStorage.clear(); 
+        datebro = [];        
+        shoItem();           
+    }
+}
+UI.btn_delete_all.addEventListener("click",delete_all_data);
 // update
 // search
