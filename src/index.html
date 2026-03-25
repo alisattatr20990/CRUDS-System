@@ -1,132 +1,146 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./output.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
     <title>CRUDS - Clean Interactive UI</title>
-</head>
+  </head>
 
-<body class="bg-gray-800 text-white font-sans antialiased">
-
+  <body class="bg-gray-800 text-white font-sans antialiased">
     <header class="text-center py-6 md:text-xl">
-        <h2 class="font-bold uppercase tracking-widest text-sky-400">curds</h2>
-        <p class="font-light text-gray-400">
-            <span class="uppercase font-bold text-sky-400">c</span>reate
-            <span class="uppercase font-bold text-sky-400">u</span>pdate
-            <span class="uppercase font-bold text-sky-400">r</span>ead
-            <span class="uppercase font-bold text-sky-400">d</span>elete
-            <span class="uppercase font-bold text-sky-400">s</span>earch
-        </p>
+      <h2 class="font-bold uppercase tracking-widest text-sky-400">curds</h2>
+      <p class="font-light text-gray-400">
+        <span class="uppercase font-bold text-sky-400">c</span>reate
+        <span class="uppercase font-bold text-sky-400">u</span>pdate
+        <span class="uppercase font-bold text-sky-400">r</span>ead
+        <span class="uppercase font-bold text-sky-400">d</span>elete
+        <span class="uppercase font-bold text-sky-400">s</span>earch
+      </p>
     </header>
 
     <main class="mx-auto w-[90%] md:w-[80%] my-4">
+      <section id="input-sec">
+        <form id="crud-form">
+          <input
+            class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 border border-transparent transition-all duration-300 hover:border-sky-500/50 hover:scale-[1.005] focus:ring-1 focus:ring-sky-500 focus:bg-gray-900"
+            type="text"
+            id="name-item"
+            placeholder="Name of Item"
+          />
 
-        <section id="input-sec">
-            <form id="crud-form">
-                <input class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 
-                              border border-transparent transition-all duration-300 
-                              hover:border-sky-500/50 hover:scale-[1.005] 
-                              focus:ring-1 focus:ring-sky-500 focus:bg-gray-900" type="text" id="name-item"
-                    placeholder="Name of Item">
+          <div class="md:flex gap-1">
+            <input
+              class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 border border-transparent transition-all duration-300 hover:border-sky-500/50 hover:scale-[1.01] focus:ring-1 focus:ring-sky-500 focus:bg-gray-900"
+              type="number"
+              id="price"
+              placeholder="Price"
+            />
 
-                <div class="md:flex gap-1">
-                    <input class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 
-                                  border border-transparent transition-all duration-300 
-                                  hover:border-sky-500/50 hover:scale-[1.01] 
-                                  focus:ring-1 focus:ring-sky-500 focus:bg-gray-900" type="number" id="price"
-                        placeholder="Price">
+            <input
+              class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 border border-transparent transition-all duration-300 hover:border-sky-500/50 hover:scale-[1.01] focus:ring-1 focus:ring-sky-500 focus:bg-gray-900"
+              type="number"
+              id="taxes"
+              placeholder="Taxes"
+            />
 
-                    <input class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 
-                                border border-transparent transition-all duration-300 
-                                hover:border-sky-500/50 hover:scale-[1.01] 
-                                focus:ring-1 focus:ring-sky-500 focus:bg-gray-900" type="number" id="taxes"
-                        placeholder="Taxes">
+            <input
+              class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 border border-transparent transition-all duration-300 hover:border-sky-500/50 hover:scale-[1.01] focus:ring-1 focus:ring-sky-500 focus:bg-gray-900"
+              type="number"
+              id="ads"
+              placeholder="Ads"
+            />
 
-                    <input class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 
-                                border border-transparent transition-all duration-300 
-                            hover:border-sky-500/50 hover:scale-[1.01] 
-                                focus:ring-1 focus:ring-sky-500 focus:bg-gray-900" type="number" id="ads"
-                        placeholder="Ads">
+            <input
+              class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 border border-transparent transition-all duration-300 hover:border-sky-500/50 hover:scale-[1.01] focus:ring-1 focus:ring-sky-500 focus:bg-gray-900"
+              type="number"
+              id="discount"
+              placeholder="Discount"
+            />
 
-                    <input class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 
-                                border border-transparent transition-all duration-300 
-                                hover:border-sky-500/50 hover:scale-[1.01] 
-                                focus:ring-1 focus:ring-sky-500 focus:bg-gray-900" type="number" id="discount"
-                        placeholder="Discount">
+            <input
+              class="text-white bg-sky-700 w-full rounded-md outline-none p-2 my-1 font-bold text-center transition-all duration-300"
+              type="text"
+              id="total"
+              readonly
+              placeholder="Total"
+            />
+          </div>
 
-                    <input class="text-white bg-sky-700 w-full rounded-md outline-none p-2 my-1 font-bold text-center 
-                                transition-all duration-300" type="text" id="total" readonly placeholder="Total">
-                </div>
+          <input
+            class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 border border-transparent transition-all duration-300 hover:border-sky-500/50 hover:scale-[1.005] focus:ring-1 focus:ring-sky-500 focus:bg-gray-900"
+            type="number"
+            id="count"
+            placeholder="Count"
+          />
 
-                <input class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 
-                              border border-transparent transition-all duration-300 
-                              hover:border-sky-500/50 hover:scale-[1.005] 
-                              focus:ring-1 focus:ring-sky-500 focus:bg-gray-900" type="number" id="count"
-                    placeholder="Count">
+          <input
+            class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 border border-transparent transition-all duration-300 hover:border-sky-500/50 hover:scale-[1.005] focus:ring-1 focus:ring-sky-500 focus:bg-gray-900"
+            type="text"
+            id="category"
+            placeholder="Category"
+          />
+        </form>
 
-                <input class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 
-                              border border-transparent transition-all duration-300 
-                              hover:border-sky-500/50 hover:scale-[1.005] 
-                              focus:ring-1 focus:ring-sky-500 focus:bg-gray-900" type="text" id="category"
-                    placeholder="Category">
-            </form>
+        <button
+          class="bg-sky-600 hover:bg-sky-500 w-full rounded-md my-2 py-2 font-bold transition-all duration-300 hover:scale-[1.01] active:scale-95 shadow-lg"
+          id="btn-create"
+          type="submit"
+        >
+          Create
+        </button>
+      </section>
 
-            <button class="bg-sky-600 hover:bg-sky-500 w-full rounded-md my-2 py-2 font-bold 
-                           transition-all duration-300 hover:scale-[1.01] active:scale-95 shadow-lg" id="btn-create"
-                type="submit">
-                Create
-            </button>
-        </section>
+      <section id="search-sec" class="mt-6 border-t border-gray-700 pt-4">
+        <input
+          class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 border border-transparent transition-all duration-300 hover:border-sky-500/50 focus:ring-1 focus:ring-sky-500"
+          type="text"
+          id="search"
+          placeholder="Search..."
+        />
 
-        <section id="search-sec" class="mt-6 border-t border-gray-700 pt-4">
-            <input class="text-gray-300 bg-gray-950 w-full rounded-md outline-none p-2 my-1 
-                          border border-transparent transition-all duration-300 
-                          hover:border-sky-500/50 focus:ring-1 focus:ring-sky-500" type="text" id="search"
-                placeholder="Search...">
-
-            <div class="md:flex md:gap-4">
-                <button class="bg-sky-600 hover:bg-sky-500 w-full rounded-md my-1 py-2 font-medium 
-                               transition-all duration-300 hover:scale-[1.02] active:scale-95"
-                    id="btn-Search-By-title">
-                    Search By Title
-                </button>
-                <button class="bg-sky-600 hover:bg-sky-500 w-full rounded-md my-1 py-2 font-medium 
-                               transition-all duration-300 hover:scale-[1.02] active:scale-95"
-                    id="btn-Search-By-Category">
-                    Search By Category
-                </button>
-            </div>
-            <button class="bg-red-700 hover:bg-red-600 w-full rounded-md mt-4 mb-8 py-2 font-bold 
-                            transition-all duration-300 hover:scale-[1.01] active:scale-95 shadow-lg"
-               id="btn-Delet-all">
-                Delete All
-            </button>
-        </section>
-        <section id="table-sec" class="mt-8 overflow-x-auto">
-            <table class="w-full text-left border-separate border-spacing-y-2">
-                <thead class="bg-gray-950">
-                    <tr class="uppercase text-xs tracking-wider text-sky-400">
-                        <th class="p-3">ID</th>
-                        <th class="p-3">Title</th>
-                        <th class="p-3">Price</th>
-                        <th class="p-3">Taxes</th>
-                        <th class="p-3">Ads</th>
-                        <th class="p-3">Discount</th>
-                        <th class="p-3 text-white">Total</th>
-                        <th class="p-3">Category</th>
-                        <th class="p-3 text-center">Update</th>
-                        <th class="p-3 text-center">Delete</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody" class="text-sm">
-                    
-                </tbody>
-            </table>
-        </section>
+        <div class="md:flex md:gap-4">
+          <button
+            class="bg-sky-600 hover:bg-sky-500 w-full rounded-md my-1 py-2 font-medium transition-all duration-300 hover:scale-[1.02] active:scale-95"
+            id="btn-Search-By-title"
+          >
+            Search By Title
+          </button>
+          <button
+            class="bg-sky-600 hover:bg-sky-500 w-full rounded-md my-1 py-2 font-medium transition-all duration-300 hover:scale-[1.02] active:scale-95"
+            id="btn-Search-By-Category"
+          >
+            Search By Category
+          </button>
+        </div>
+        <button
+          class="bg-red-700 hover:bg-red-600 w-full rounded-md mt-4 mb-8 py-2 font-bold transition-all duration-300 hover:scale-[1.01] active:scale-95 shadow-lg"
+          id="btn-Delet-all"
+        >
+          Delete All
+        </button>
+      </section>
+      <section id="table-sec" class="mt-8 overflow-x-auto">
+        <table class="w-full text-left border-separate border-spacing-y-2">
+          <thead class="bg-gray-950">
+            <tr class="uppercase text-xs tracking-wider text-sky-400">
+              <th class="p-3">ID</th>
+              <th class="p-3">Title</th>
+              <th class="p-3">Price</th>
+              <th class="p-3">Taxes</th>
+              <th class="p-3">Ads</th>
+              <th class="p-3">Discount</th>
+              <th class="p-3 text-white">Total</th>
+              <th class="p-3">Category</th>
+              <th class="p-3 text-center">Update</th>
+              <th class="p-3 text-center">Delete</th>
+            </tr>
+          </thead>
+          <tbody id="tbody" class="text-sm"></tbody>
+        </table>
+        
+      </section>
     </main>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

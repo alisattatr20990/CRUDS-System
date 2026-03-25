@@ -1,3 +1,6 @@
+let tmp; 
+let mode = 'create';
+
 const UI = {
     item_name: document.getElementById("name-item"),
     price: document.getElementById("price"),
@@ -45,7 +48,21 @@ UI.btn_create.addEventListener("click", function () {
         count: UI.count.value,
         category: UI.category.value,
     };
-    datebro.push(newprod);
+    if (mode === 'create') {
+        if (newprod.count > 1) {
+            for (let i = 0; i < newprod.count; i++) {
+                datebro.push(newprod);
+            }
+        } else {
+            datebro.push(newprod);
+        }
+    } else {
+        datebro[tmp] = newprod;             
+        
+        mode = 'create';
+        UI.btn_create.innerHTML = 'Create';
+        UI.count.style.display = 'block';
+    }
     localStorage.setItem("prodect", JSON.stringify(datebro));
 
     clear_date();
@@ -80,7 +97,7 @@ function shoItem() {
                         <td class="p-3">${datebro[i].category}</td>
                         <td class="p-3 text-center">
                             <button
-                                class="bg-indigo-600 hover:bg-indigo-500 px-4 py-1 rounded transition-all active:scale-90">Update</button>
+                                onclick="updateData(${i})" class="bg-indigo-600 hover:bg-indigo-500 px-4 py-1 rounded transition-all active:scale-90">Update</button>
                         </td>
                         <td class="p-3 text-center">
                             <button
@@ -93,9 +110,9 @@ function shoItem() {
 
     if (datebro.length > 0) {
         UI.btn_delete_all.innerHTML = `Delete All (${datebro.length})`;
-        UI.btn_delete_all.style.display = 'block'; 
+        UI.btn_delete_all.style.display = "block";
     } else {
-        UI.btn_delete_all.style.display = 'none'; 
+        UI.btn_delete_all.style.display = "none";
     }
 }
 
@@ -110,11 +127,37 @@ function delet_item(i) {
 // clean date
 function delete_all_data() {
     if (confirm("Are you sure you want to delete everything?")) {
-        localStorage.clear(); 
-        datebro = [];        
-        shoItem();           
+        localStorage.clear();
+        datebro = [];
+        shoItem();
     }
 }
-UI.btn_delete_all.addEventListener("click",delete_all_data);
+UI.btn_delete_all.addEventListener("click", delete_all_data);
+
 // update
+
+function updateData(i) {
+    UI.item_name.value = datebro[i].title;
+    UI.price.value = datebro[i].price;
+    UI.taxes.value = datebro[i].taxes;
+    UI.ads.value = datebro[i].ads;
+    UI.discount.value = datebro[i].discount;
+    UI.category.value = datebro[i].category;
+    UI.total.value= datebro[i].total;
+
+
+    UI.count.style.display = 'none';
+
+    UI.btn_create.innerHTML = 'Update';
+    
+    mode = 'update';
+    tmp = i;
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
 // search
+
+shoItem();
