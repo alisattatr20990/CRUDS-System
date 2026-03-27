@@ -1,5 +1,5 @@
-let tmp; 
-let mode = 'create';
+let tmp;
+let mode = "create";
 
 const UI = {
     item_name: document.getElementById("name-item"),
@@ -12,6 +12,9 @@ const UI = {
     category: document.getElementById("category"),
     btn_create: document.getElementById("btn-create"),
     btn_delete_all: document.getElementById("btn-Delet-all"),
+    search: document.getElementById("search"),
+    btn_search_by_title: document.getElementById("btn-Search-By-title"),
+    btn_search_by_category: document.getElementById("btn-Search-By-Category"),
 };
 // get total
 
@@ -48,7 +51,7 @@ UI.btn_create.addEventListener("click", function () {
         count: UI.count.value,
         category: UI.category.value,
     };
-    if (mode === 'create') {
+    if (mode === "create") {
         if (newprod.count > 1) {
             for (let i = 0; i < newprod.count; i++) {
                 datebro.push(newprod);
@@ -57,11 +60,11 @@ UI.btn_create.addEventListener("click", function () {
             datebro.push(newprod);
         }
     } else {
-        datebro[tmp] = newprod;             
-        
-        mode = 'create';
-        UI.btn_create.innerHTML = 'Create';
-        UI.count.style.display = 'block';
+        datebro[tmp] = newprod;
+
+        mode = "create";
+        UI.btn_create.innerHTML = "Create";
+        UI.count.style.display = "block";
     }
     localStorage.setItem("prodect", JSON.stringify(datebro));
 
@@ -143,21 +146,71 @@ function updateData(i) {
     UI.ads.value = datebro[i].ads;
     UI.discount.value = datebro[i].discount;
     UI.category.value = datebro[i].category;
-    UI.total.value= datebro[i].total;
+    UI.total.value = datebro[i].total;
 
+    UI.count.style.display = "none";
 
-    UI.count.style.display = 'none';
+    UI.btn_create.innerHTML = "Update";
 
-    UI.btn_create.innerHTML = 'Update';
-    
-    mode = 'update';
+    mode = "update";
     tmp = i;
 
     window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: "smooth",
     });
 }
-// search
 
 shoItem();
+
+// search
+// search
+let SearchMod = "title";
+
+function getSerchMood(id) {
+    if (id === "btn-Search-By-title") {
+        SearchMod = "title";
+    } else {
+        SearchMod = "category";
+    }
+    UI.search.placeholder = "Search By " + SearchMod;
+    UI.search.focus();
+    UI.search.value = '';
+    shoItem(); 
+}
+
+function searchdate(value) {
+    let table = "";
+    for (let i = 0; i < datebro.length; i++) {
+        if (SearchMod === 'title') {
+            if (datebro[i].title.toLowerCase().includes(value.toLowerCase())) {
+                table += getRowHtml(i);
+            }
+        } else {
+            if (datebro[i].category.toLowerCase().includes(value.toLowerCase())) {
+                table += getRowHtml(i);
+            }
+        }
+    }
+    document.getElementById("tbody").innerHTML = table;
+}
+
+function getRowHtml(i) {
+    return `
+    <tr class="bg-gray-900/50 hover:bg-gray-700 transition-colors duration-200">
+        <td class="p-3">${i + 1}</td>
+        <td class="p-3 font-medium">${datebro[i].title}</td>
+        <td class="p-3">${datebro[i].price}</td>
+        <td class="p-3">${datebro[i].taxes}</td>
+        <td class="p-3">${datebro[i].ads}</td>
+        <td class="p-3">${datebro[i].discount}</td>
+        <td class="p-3 font-bold text-sky-400">${datebro[i].total}</td>
+        <td class="p-3">${datebro[i].category}</td>
+        <td class="p-3 text-center">
+            <button onclick="updateData(${i})" class="bg-indigo-600 hover:bg-indigo-500 px-4 py-1 rounded transition-all active:scale-90">Update</button>
+        </td>
+        <td class="p-3 text-center">
+            <button onclick="delet_item(${i})" class="bg-red-700 hover:bg-red-600 px-4 py-1 rounded transition-all active:scale-90">Delete</button>
+        </td>
+    </tr>`;
+}

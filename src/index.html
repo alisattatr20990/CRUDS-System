@@ -97,17 +97,18 @@
           type="text"
           id="search"
           placeholder="Search..."
+          onkeyup="searchdate(this.value)"
         />
 
         <div class="md:flex md:gap-4">
           <button
-            class="bg-sky-600 hover:bg-sky-500 w-full rounded-md my-1 py-2 font-medium transition-all duration-300 hover:scale-[1.02] active:scale-95"
+           onclick="getSerchMood(this.id)" class="bg-sky-600 hover:bg-sky-500 w-full rounded-md my-1 py-2 font-medium transition-all duration-300 hover:scale-[1.02] active:scale-95"
             id="btn-Search-By-title"
           >
             Search By Title
           </button>
           <button
-            class="bg-sky-600 hover:bg-sky-500 w-full rounded-md my-1 py-2 font-medium transition-all duration-300 hover:scale-[1.02] active:scale-95"
+            onclick="getSerchMood(this.Id)" class="bg-sky-600 hover:bg-sky-500 w-full rounded-md my-1 py-2 font-medium transition-all duration-300 hover:scale-[1.02] active:scale-95"
             id="btn-Search-By-Category"
           >
             Search By Category
