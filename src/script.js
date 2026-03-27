@@ -42,36 +42,42 @@ if (localStorage.prodect != null) {
 
 UI.btn_create.addEventListener("click", function () {
     let newprod = {
-        title: UI.item_name.value,
+        title: UI.item_name.value.trim(), 
         price: UI.price.value,
         taxes: UI.taxes.value,
         ads: UI.ads.value,
         discount: UI.discount.value,
         total: UI.total.value,
         count: UI.count.value,
-        category: UI.category.value,
+        category: UI.category.value.trim(),
     };
-    if (mode === "create") {
-        if (newprod.count > 1) {
-            for (let i = 0; i < newprod.count; i++) {
+
+    // Validation
+    if (newprod.title != "" && newprod.price != "" && newprod.category != "" && newprod.count < 100 && newprod.count != "" && newprod.ads != "" && newprod.discount != "") {
+        
+        if (mode === "create") {
+            if (newprod.count > 1) {
+                for (let i = 0; i < newprod.count; i++) {
+                    datebro.push(newprod);
+                }
+            } else {
                 datebro.push(newprod);
             }
         } else {
-            datebro.push(newprod);
+            datebro[tmp] = newprod;
+            mode = "create";
+            UI.btn_create.innerHTML = "Create";
+            UI.count.style.display = "block";
         }
+        
+        localStorage.setItem("prodect", JSON.stringify(datebro));
+        clear_date();
     } else {
-        datebro[tmp] = newprod;
-
-        mode = "create";
-        UI.btn_create.innerHTML = "Create";
-        UI.count.style.display = "block";
+        alert("Please fill in the Name, Price, and Category!"); 
     }
-    localStorage.setItem("prodect", JSON.stringify(datebro));
 
-    clear_date();
     shoItem();
 });
-
 // clear inputs
 function clear_date() {
     UI.item_name.value = "";
